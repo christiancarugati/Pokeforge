@@ -1,4 +1,6 @@
 <?php
+require_once("conn.php"); // Include il file di connessione al database
+
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -19,11 +21,6 @@ if (!$email || !$password) {
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     redirectWithMsg("Email non valida.");
-}
-
-$conn = new mysqli("localhost", "root", "", "poke_forge");
-if ($conn->connect_error) {
-    redirectWithMsg("Errore di connessione al database.");
 }
 
 $stmt = $conn->prepare("SELECT ID, password, username FROM Utenti WHERE email = ?");

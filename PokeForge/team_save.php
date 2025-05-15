@@ -1,4 +1,7 @@
 <?php
+
+require_once("conn.php"); // Include il file di connessione al database
+
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -14,11 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $utente_id = $_SESSION['user_id'];
 $team_id = $_POST['team_id'] ?? null;
 $pokemons = $_POST['pokemon'] ?? [];
-
-$conn = new mysqli("localhost", "root", "", "poke_forge");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 function cleanString($str) {
     return substr(trim($str), 0, 50);

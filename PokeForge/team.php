@@ -1,15 +1,11 @@
 <?php
+require_once("conn.php"); // Include il file di connessione al database
+
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
-
-$conn = new mysqli("localhost", "root", "", "poke_forge");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Recupero lista pokemon base
 $pokemon_stmt = $conn->prepare("SELECT ID, nome, tipo1, tipo2, sprite_url FROM Poke_Esistenti ORDER BY nome ASC");
 $pokemon_stmt->execute();

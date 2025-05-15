@@ -1,4 +1,6 @@
 <?php
+require_once("conn.php"); // Include il file di connessione al database
+
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -29,10 +31,6 @@ if (strlen($password) < 6) {
     redirectWithMsg("La password deve contenere almeno 6 caratteri.");
 }
 
-$conn = new mysqli("localhost", "root", "", "poke_forge");
-if ($conn->connect_error) {
-    redirectWithMsg("Errore di connessione al database.");
-}
 
 $stmt = $conn->prepare("SELECT ID FROM Utenti WHERE email = ?");
 $stmt->bind_param("s", $email);

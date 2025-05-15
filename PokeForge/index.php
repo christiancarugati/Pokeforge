@@ -1,13 +1,10 @@
 <?php 
+require_once("conn.php"); // Include il file di connessione al database
+
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
-}
-
-$conn = new mysqli("localhost", "root", "", "poke_forge");
-if ($conn->connect_error) {
-    die("Connection failed: ".$conn->connect_error);
 }
 
 // GESTIONE RINOMINA TEAM - MODIFICA
